@@ -16,3 +16,33 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  font-size: 1.5rem;
+  margin: 2rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+.value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #222;
+}
+
+.label {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #999;
+  margin-top: 0.5rem;
+}
