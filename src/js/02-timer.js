@@ -1,4 +1,4 @@
-import flatpickr  from 'flatpickr';
+import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import Notiflix from 'notiflix';
 
@@ -9,7 +9,7 @@ const seconds = document.querySelector('span[data-seconds]');
 const startBtn = document.querySelector('button[data-start]');
 
 let intervalId = null;
-startBtn.disabled = true; 
+startBtn.disabled = true;
 let targetDate = null;
 
 const options = {
@@ -19,17 +19,16 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     if (selectedDates[0] < new Date()) {
-      startBtn.disabled = true; 
+      startBtn.disabled = true;
       Notiflix.Notify.failure('Please choose a date in the future!');
-    }
-    else {
+    } else {
       targetDate = selectedDates[0];
-      startBtn.disabled = false; 
+      startBtn.disabled = false;
     }
   },
 };
 
-flatpickr("#datetime-picker", options);
+flatpickr('#datetime-picker', options);
 
 function convertMs(ms) {
   const second = 1000;
@@ -43,28 +42,27 @@ function convertMs(ms) {
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
-};
+}
 
-
-const addLeadingZero = (value) => {
-  return String(value).padStart(2, '0')
+const addLeadingZero = value => {
+  return String(value).padStart(2, '0');
 };
 
 const updateCountdown = () => {
   intervalId = setInterval(() => {
-    startBtn.disabled = true; 
+    startBtn.disabled = true;
     const currentTime = Date.now();
-  const deltaTime = targetDate - currentTime;
-        if (deltaTime < 1000) {
-          clearInterval(intervalId);
-          startBtn.disabled = false;
-        }
-        const {days: d, hours: h, minutes: m, seconds: s} = convertMs(deltaTime);
-  days.textContent = addLeadingZero(d);
-  hours.textContent = addLeadingZero(h);
-  minutes.textContent = addLeadingZero(m);
-  seconds.textContent = addLeadingZero(s);
-      }, 1000);
-}
+    const deltaTime = targetDate - currentTime;
+    if (deltaTime < 1000) {
+      clearInterval(intervalId);
+      startBtn.disabled = false;
+    }
+    const { days: d, hours: h, minutes: m, seconds: s } = convertMs(deltaTime);
+    days.textContent = addLeadingZero(d);
+    hours.textContent = addLeadingZero(h);
+    minutes.textContent = addLeadingZero(m);
+    seconds.textContent = addLeadingZero(s);
+  }, 1000);
+};
 
 startBtn.addEventListener('click', updateCountdown);
